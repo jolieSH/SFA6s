@@ -7,6 +7,7 @@ def createsuite():
     dir='D:\\SFA6s\\SFA6s'
     #定义discover方法的参数
     discover=unittest.defaultTestLoader.discover(dir,pattern='login*.py',top_level_dir=None)
+    print discover
     #discover筛选出的用例，循环添加到测试套件中
     for test_suite in discover:
         for test_case in test_suite:
