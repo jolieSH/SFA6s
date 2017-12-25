@@ -43,14 +43,27 @@ class SFA_login(unittest.TestCase):
         self.driver.find_element_by_xpath("//android.view.View[@index='2']/android.widget.Button[@index='0']").click()
 
 
-    def SFA6s_login(self):
-        #self.username = account_info.username
-        #self.password = account_info.password
-        self.driver.find_element_by_xpath("//android.view.View[@index='0']/android.widget.EditText[@index='0']").clear()
-        self.driver.find_element_by_xpath("//android.view.View[@index='0']/android.widget.EditText[@index='0']").send_keys(self.username)
-        self.driver.find_element_by_xpath("//android.view.View[@index='1']/android.widget.EditText[@index='0']").clear()
-        self.driver.find_element_by_xpath("//android.view.View[@index='1']/android.widget.EditText[@index='0']").send_keys(self.password)
-        self.driver.find_element_by_accessibility_id("登录").click()
+    def test_SFA6s_login(self):
+        try:
+            #self.username = account_info.username
+            #self.password = account_info.password
+            self.driver.find_element_by_xpath("//android.view.View[@index='0']/android.widget.EditText[@index='0']").clear()
+            self.driver.find_element_by_xpath("//android.view.View[@index='0']/android.widget.EditText[@index='0']").send_keys(self.username)
+            self.driver.find_element_by_xpath("//android.view.View[@index='1']/android.widget.EditText[@index='0']").clear()
+            self.driver.find_element_by_xpath("//android.view.View[@index='1']/android.widget.EditText[@index='0']").send_keys(self.password)
+            self.driver.find_element_by_accessibility_id("登录").click()
+            time.sleep(15)
+        except:
+            self.driver.switch_to_alert().accept()
+            self.driver.find_element_by_xpath("//android.view.View[@index='0']/android.widget.EditText[@index='0']").clear()
+            self.driver.find_element_by_xpath("//android.view.View[@index='0']/android.widget.EditText[@index='0']").send_keys(self.username)
+            self.driver.find_element_by_xpath("//android.view.View[@index='1']/android.widget.EditText[@index='0']").clear()
+            self.driver.find_element_by_xpath("//android.view.View[@index='1']/android.widget.EditText[@index='0']").send_keys(self.password)
+            self.driver.find_element_by_accessibility_id("登录").click()
+            time.sleep(15)
+        else:
+            print u'登陆成功！'
+
 
     #settings=Settings('标准','idcsfaqatemp.ebestmobile.net', '443', '销售代表', '中文')
 
@@ -62,7 +75,7 @@ class SFA_login(unittest.TestCase):
 if __name__ == '__main__':
     #构造测试集
     suite=unittest.TestSuite()
-    suite.addTest(SFA_login("SFA6s_login"))
+    suite.addTest(SFA_login("test_SFA6s_login"))
     runner=unittest.TextTestRunner()
     runner.run(suite)
 

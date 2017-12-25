@@ -13,10 +13,15 @@ def send_mail(file_new):
     mail_body = f.read()
     f.close()
     msg = MIMEText(mail_body, _subtype='html', _charset='utf-8')
-    msg['Subject'] = u"测试报告"
+    '''邮件标题'''
+    msg['Subject'] = u"自动化测试报告"
+    #定义发送时间
     msg['date'] = time.strftime('%a,%d %b %Y %H:%M:%S %z')
+    #连接SMTP服务器
     smtp = smtplib.SMTP()
-    smtp.connect('smtp.qq.com:465')
+    smtp.connect('smtp.qq.com')
+    #此QQ账号暂未开通POP3/SMTP服务
+    smtp.login(mail_from,'XXX')
     smtp.sendmail(mail_from, mail_to, msg.as_string())
     smtp.quit()
     print 'email has send out'
@@ -58,4 +63,4 @@ if __name__ == '__main__':
     alltestnames = createsuite()
     runner.run(alltestnames)
     fp.close()
-    send_report(testreport)
+    #send_report(testreport)
